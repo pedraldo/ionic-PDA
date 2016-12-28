@@ -1,0 +1,31 @@
+<ion-view view-title="Classement">
+  <ion-content>
+    <h4 class="text-center">{{leagueTable.leagueCaption}}</h1>
+    <div class="padding">
+    	<ul>
+    		<li>
+				<div class="row row-center">
+				  <div class="col col-10"></div>
+				  <div class="col col-10"></div>
+				  <div class="col col-40">Equipe</div>
+				  <div class="col">Pts</div>
+				  <div class="col">J.</div>
+				  <div class="col">Diff</div>
+				</div>
+    		</li>
+    	</ul>
+    	<ul ng-repeat="ranking in leagueTable.standing">
+			<li>
+				<div class="row row-center">
+				  <div class="col col-10">{{ranking.position}}</div>
+				  <div class="col col-10 children-vertical-center"><img class="width-100" ng-src="{{ranking.crestURI}}"/></div>
+				  <div class="col col-40 font-bold">{{ranking.teamName}}</div>
+				  <div class="col font-bold">{{ranking.points}}</div>
+				  <div class="col">{{ranking.playedGames}}</div>
+				  <div class="col"><span ng-if="ranking.goalDifference > 0">+</span>{{ranking.goalDifference}}</div>
+				</div>
+			</li>
+    	</ul>
+    </div>
+  </ion-content>
+</ion-view>
