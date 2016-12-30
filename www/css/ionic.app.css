@@ -9838,3 +9838,6 @@ a.button {
 .children-vertical-center > * {
   display: inline-block;
   vertical-align: middle; }
+
+textarea {
+  min-height: 50px !important; }

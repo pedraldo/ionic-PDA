@@ -1,8 +1,6 @@
 angular.module('starter.services', [])
 
 .service('AuthService', function($q) {
-	// var _firebase = firebase.database().ref();
-	// console.log(_firebase);
 	
 	this.userIsLoggedIn = function(){
 		var deferred = $q.defer(),
@@ -96,4 +94,31 @@ angular.module('starter.services', [])
   	this.doLogout = function(){
     	firebase.auth().signOut();
   	};
-});
+})
+
+.service('GroupService', function($q) {
+	// /!\ Il faut aussi ajouter le groupe aux groupes de l'utilisateur
+	this.createGroup = function(newGroup) {
+		return firebase.database().ref('groups/').push().set({
+		    name: newGroup.name,
+		    description: newGroup.description,
+		    members: {
+		    	[firebase.auth().currentUser.uid]: true
+		    }
+		});
+	}
+
+	this.getUserGroups = function() {
+		var userId = firebase.auth().currentUser.uid;
+		var userGroupsId = firebase.database().ref('/users/' + userId + '/groups/').once('value').then((snapshot) => {
+			var result = snapshot.val();
+			debugger;
+			return result;
+		}).then((val) => {
+			debugger;
+		});
+		debugger;
+		return userGroupsId;
+	}
+})
+;

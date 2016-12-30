@@ -216,4 +216,19 @@ angular.module('starter.controllers', [])
     $state.go('auth.login');
   };
 })
+
+.controller('GroupsCtrl', function($scope, $ionicModal, $state, GroupService) {
+  $ionicModal.fromTemplateUrl('templates/modal.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+
+  $scope.createGroup = function(newGroup) {
+    GroupService.createGroup(newGroup);
+    $state.go('app.groups');
+  }
+
+  $scope.userGroups = GroupService.getUserGroups();
+})
 ;

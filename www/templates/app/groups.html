@@ -1,0 +1,29 @@
+<ion-view view-title="Groupes">
+  <ion-content>
+    <h1>Groupes</h1>
+    <ion-fab right bottom>
+	    <button ion-fab color="light"><ion-icon class="icon ion-plus" ng-click="modal.show()"></ion-icon></button>
+	</ion-fab>
+  </ion-content>
+  <script id="templates/modal.html" type="text/ng-template">
+  	<ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-positive">
+          	<h1 class="title">Nouveau Groupe</h1>
+          	<button class="button button-clear button-primary" ng-click="modal.hide()">Annuler</button>
+        </ion-header-bar>
+        <ion-content class="padding">
+          	<div class="list">
+            	<label class="item item-input item-floating-label"">
+              		<span class="input-label">Nom</span>
+              		<input ng-model="newGroup.name" type="text" placeholder="Nom">
+            	</label>
+            	<label class="item item-input item-floating-label"">
+              		<span class="input-label">Description</span>
+              		<textarea ng-model="newGroup.description" placeholder="Description"></textarea>
+            	</label>
+            	<button class="button button-full button-positive" ng-click="createGroup(newGroup)">Créer</button>
+          	</div>
+        </ion-content>
+      </ion-modal-view>
+  </script>
+</ion-view>
