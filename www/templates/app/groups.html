@@ -1,9 +1,19 @@
 <ion-view view-title="Groupes">
   <ion-content>
-    <h1>Groupes</h1>
     <ion-fab right bottom>
 	    <button ion-fab color="light"><ion-icon class="icon ion-plus" ng-click="modal.show()"></ion-icon></button>
 	</ion-fab>
+	<ion-list ng-if="hasGroup">
+	 	<ion-item ng-repeat="userGroup in userGroups" href="#/app/groups/{{userGroup.id}}">
+	   		{{userGroup.name}}
+	 	</ion-item>
+    </ion-list>
+    <div ng-if="!hasGroup" class="card">
+		<div class="item item-text-wrap">
+			Vous n'avez pas encore de groupe d'amis parieurs.
+			Cliquez sur le bouton '+' pour en créer un !
+		</div>
+    </div>
   </ion-content>
   <script id="templates/modal.html" type="text/ng-template">
   	<ion-modal-view>

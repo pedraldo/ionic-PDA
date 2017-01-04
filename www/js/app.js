@@ -111,6 +111,19 @@ angular.module('starter', ['ionic', 'firebase', 'starter.controllers', 'starter.
     }
   })
 
+  .state('app.group', {
+    url: '/groups/:groupId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/app/group.html',
+        controller: 'GroupCtrl'
+      }
+    },
+    data: {
+      authenticate: true
+    }
+  })
+
   .state('app.playlists', {
     url: '/playlists',
     views: {

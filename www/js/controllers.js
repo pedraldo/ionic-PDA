@@ -217,18 +217,43 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('GroupsCtrl', function($scope, $ionicModal, $state, GroupService) {
+.controller('GroupsCtrl', function($scope, $ionicModal, $state, $ionicLoading, GroupService) {
+  $scope.hasGroup = true;
+
   $ionicModal.fromTemplateUrl('templates/modal.html', {
     scope: $scope
   }).then(function(modal) {
     $scope.modal = modal;
   });
 
+  $ionicLoading.show({
+    template: 'Chargement ...'
+  });
+
+  GroupService.getUserGroups().then((groups) => {
+    $scope.$apply(() => {
+      $scope.hasGroup = !!groups;
+      $scope.userGroups = groups;
+    });
+    $ionicLoading.hide();
+    console.log($scope.userGroups);
+  });
+
   $scope.createGroup = function(newGroup) {
     GroupService.createGroup(newGroup);
+    $scope.userGroups.push(newGroup);
+    $scope.modal.hide();
     $state.go('app.groups');
   }
 
-  $scope.userGroups = GroupService.getUserGroups();
+})
+
+.controller('GroupCtrl', function($scope, $stateParams, GroupService) {
+  $scope.groupId = $stateParams.groupId;
+  GroupService.getGroup($scope.groupId).then((group) => {
+    $scope.group = group;
+    debugger;
+  });
+
 })
 ;
